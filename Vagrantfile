@@ -11,7 +11,8 @@ Vagrant.configure("2") do |config|
          v.memory = 512
          v.cpus = 2
        end
-    end
+       balanceador.vm.provision "shell", inline: "service apache2 restart", run: "always"
+   end
 ###web1
    config.vm.define "web1" do |web1|
        web1.vm.box = "hashicorp/precise64"
@@ -21,6 +22,7 @@ Vagrant.configure("2") do |config|
          v.memory = 512
          v.cpus = 2
        end
+       #web1.vm.synced_folder "www/", "/var/www"
     end
 ###web2
    config.vm.define "web2" do |web2|
@@ -31,5 +33,6 @@ Vagrant.configure("2") do |config|
          v.memory = 512
          v.cpus = 2
        end
+       #web2.vm.synced_folder "www/", "/var/www"
     end
 end
